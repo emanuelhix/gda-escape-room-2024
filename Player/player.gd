@@ -5,14 +5,15 @@ const FORWARD: String = "forward"
 const BACK: String = "back"
 const RIGHT: String = "right"
 const MOVE_DURATION: float = 0.25
-signal move_start # fires when the movement animation starts
-signal move_end # fires when the movement animation ends
 
-#	New end position
-var endPos: Vector3 = Vector3();
+signal move_start  # Fires when the movement animation starts
+signal move_end    # Fires when the movement animation ends
 
-#	Angle for Player to turn with
-var dir_angle:float = 0;
+# New end position
+var end_position: Vector3 = Vector3()  # Renamed for clarity
+
+# Angle for player to turn with
+var dir_angle: float = 0.0  # Type specified for clarity
 
 var tween: Tween = null
 
@@ -27,7 +28,6 @@ func _process(delta: float) -> void:
 		BACK: Vector3(0, 0, 5)
 	}
 
-	var dir_angle: float = 0.0
 	var direction: Vector3 = Vector3.ZERO
 	var action_pressed: bool = false
 
@@ -44,11 +44,11 @@ func _process(delta: float) -> void:
 
 	if not action_pressed:
 		return
-		
+
 	print("Turning angle: " + str(dir_angle))
-	endPos = global_position + direction
+	end_position = global_position + direction
 	tween = get_tree().create_tween()
-	tween.tween_property(self, "global_position", endPos, MOVE_DURATION)
+	tween.tween_property(self, "global_position", end_position, MOVE_DURATION)
 	tween.tween_callback(move_end.emit)
 	move_start.emit()
 	tween.play()
