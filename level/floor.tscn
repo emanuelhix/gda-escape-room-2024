@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wokx"]
 size = Vector3(20, 1, 20)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D2" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 
