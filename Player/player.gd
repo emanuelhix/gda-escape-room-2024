@@ -9,6 +9,8 @@ const MOVE_DURATION: float = 0.25
 signal move_start  # Fires when the movement animation starts
 signal move_end    # Fires when the movement animation ends
 
+@onready var anim_player = $AnimationPlayer
+
 # New end position
 var end_position: Vector3 = Vector3()  # Renamed for clarity
 
@@ -45,7 +47,7 @@ func _process(delta: float) -> void:
 	if not action_pressed:
 		return
 
-	print("Turning angle: " + str(dir_angle))
+	anim_player.play("jump")
 	end_position = global_position + direction
 	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", end_position, MOVE_DURATION)
