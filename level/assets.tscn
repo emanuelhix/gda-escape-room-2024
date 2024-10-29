@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bicutnucogm4o" path="res://level/assets.blend" id="1_5dndf"]
 
 [node name="assets" instance=ExtResource("1_5dndf")]
+
+[node name="Cube_009" parent="." index="21"]
+transform = Transform3D(1.23164, 0, 0, 0, 0.770373, 0, 0, 0, 1.38068, -1.34853, 3.96184, -11.0627)

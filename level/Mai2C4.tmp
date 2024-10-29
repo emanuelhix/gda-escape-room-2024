@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://c47efgxp2dyaa"]
+[gd_scene load_steps=56 format=4 uid="uid://c47efgxp2dyaa"]
 
 [ext_resource type="PackedScene" uid="uid://c3t8uy1et6fe1" path="res://Player/player.tscn" id="1_w8a2e"]
 [ext_resource type="Script" path="res://level/Main.gd" id="1_xu62y"]
@@ -8,21 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://n72qw4leord4" path="res://truck.tscn" id="5_ov2pb"]
 [ext_resource type="PackedScene" uid="uid://fhxtvkp7cw06" path="res://car.tscn" id="6_67td3"]
 [ext_resource type="PackedScene" uid="uid://dcy3s8bcx2a25" path="res://black_fade_layer.tscn" id="8_hffgm"]
-[ext_resource type="PackedScene" uid="uid://c5pwf5vede5ij" path="res://tree.tscn" id="9_31um8"]
-[ext_resource type="PackedScene" uid="uid://b771lva5vncno" path="res://tree-alt.tscn" id="10_o3fv8"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r4tjy"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_6mmw5"]
-sky_material = SubResource("ProceduralSkyMaterial_r4tjy")
-
-[sub_resource type="Environment" id="Environment_glmbp"]
-background_mode = 2
-sky = SubResource("Sky_6mmw5")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwef4"]
 resource_name = "Grass.001"
@@ -560,38 +545,16 @@ size = Vector3(4, 3, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_klun3"]
 size = Vector3(40, 40, 30)
 
-[sub_resource type="BoxMesh" id="BoxMesh_3pt0w"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2svql"]
-albedo_color = Color(0, 0, 0, 1)
-
 [node name="Main" type="Node3D" node_paths=PackedStringArray("player", "player_on_screen_notifier", "camera")]
 script = ExtResource("1_xu62y")
 player = NodePath("Player")
 player_on_screen_notifier = NodePath("Player/VisibleOnScreenNotifier3D")
 camera = NodePath("ScrollingCamera")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_glmbp")
-
 [node name="UILayer" parent="." instance=ExtResource("2_dteke")]
-layer = -1
 
 [node name="TimerLabel" parent="UILayer/GameUI" index="0" node_paths=PackedStringArray("game_timer")]
 game_timer = NodePath("../../../GameTimer")
-
-[node name="Control" type="Control" parent="UILayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 576.0
-offset_top = 223.0
-offset_right = 616.0
-offset_bottom = 263.0
-
-[node name="LineEdit" type="LineEdit" parent="UILayer/Control"]
-layout_mode = 0
-offset_right = 67.0625
-offset_bottom = 31.0
 
 [node name="ScrollingCamera" type="Camera3D" parent="." node_paths=PackedStringArray("offset_marker", "player")]
 transform = Transform3D(0.803965, -0.312979, 0.505653, 0.00163662, 0.85146, 0.524417, -0.594675, -0.420785, 0.685056, 4.58844, 9.11962, 12.4542)
@@ -600,10 +563,8 @@ offset_marker = NodePath("../Player/CameraOffset")
 player = NodePath("../Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, -0.0445576, 1.90735e-06, 0.100775)
-light_color = Color(0.617455, 0.617455, 0.617455, 1)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
-shadow_opacity = 0.52
 
 [node name="Player" parent="." instance=ExtResource("1_w8a2e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6458, 7.74745)
@@ -647,11 +608,6 @@ transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0867481, 0.
 mesh = SubResource("ArrayMesh_ww2rq")
 skeleton = NodePath("")
 
-[node name="grass8" type="MeshInstance3D" parent="."]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0867481, 0.580035, -40.2471)
-mesh = SubResource("ArrayMesh_ww2rq")
-skeleton = NodePath("")
-
 [node name="grass2" type="MeshInstance3D" parent="."]
 transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, 3.75292)
 mesh = SubResource("ArrayMesh_ww2rq")
@@ -662,56 +618,11 @@ transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.
 mesh = SubResource("ArrayMesh_ww2rq")
 skeleton = NodePath("")
 
-[node name="grass11" type="MeshInstance3D" parent="."]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, 11.7529)
-mesh = SubResource("ArrayMesh_ww2rq")
-skeleton = NodePath("")
-
-[node name="grass9" type="MeshInstance3D" parent="."]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.164018, 0.492667, -55.753)
-mesh = SubResource("ArrayMesh_ww2rq")
-skeleton = NodePath("")
-
-[node name="grass10" type="MeshInstance3D" parent="."]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.168513, 0.492669, -59.473)
-mesh = SubResource("ArrayMesh_ww2rq")
-skeleton = NodePath("")
-
-[node name="grass12" type="MeshInstance3D" parent="."]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.164018, 0.492667, -70.753)
-mesh = SubResource("ArrayMesh_ww2rq")
-skeleton = NodePath("")
-
-[node name="grass13" type="MeshInstance3D" parent="."]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.168513, 0.492669, -74.473)
-mesh = SubResource("ArrayMesh_ww2rq")
-skeleton = NodePath("")
-
 [node name="RoadWithStripes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.75603)
 
 [node name="roadLane02" type="MeshInstance3D" parent="RoadWithStripes"]
 transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -0.468547)
-mesh = SubResource("ArrayMesh_bryts")
-skeleton = NodePath("")
-
-[node name="roadLane03" type="MeshInstance3D" parent="RoadWithStripes"]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -40.4685)
-mesh = SubResource("ArrayMesh_bryts")
-skeleton = NodePath("")
-
-[node name="roadLane04" type="MeshInstance3D" parent="RoadWithStripes"]
-transform = Transform3D(-29.7775, 0, -1.35505e-07, 0, 0.129519, 0, 2.60323e-06, 0, -1.55, 0.201962, 0.580035, -47.9744)
-mesh = SubResource("ArrayMesh_bryts")
-skeleton = NodePath("")
-
-[node name="roadLane05" type="MeshInstance3D" parent="RoadWithStripes"]
-transform = Transform3D(-29.7775, 0, -1.35505e-07, 0, 0.129519, 0, 2.60323e-06, 0, -1.55, 0.201962, 0.580035, -59.655)
-mesh = SubResource("ArrayMesh_bryts")
-skeleton = NodePath("")
-
-[node name="roadLane06" type="MeshInstance3D" parent="RoadWithStripes"]
-transform = Transform3D(-29.7775, 0, -1.35505e-07, 0, 0.129519, 0, 2.60323e-06, 0, -1.55, 0.201962, 0.580035, -63.655)
 mesh = SubResource("ArrayMesh_bryts")
 skeleton = NodePath("")
 
@@ -776,9 +687,34 @@ skeleton = NodePath("")
 [node name="RoadWithStripes4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.756)
 
+[node name="Cube_012" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -12.8719, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_cw75u")
+skeleton = NodePath("")
+
+[node name="Cube_013" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -9.02155, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_oepuf")
+skeleton = NodePath("")
+
+[node name="Cube_014" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -5.15167, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_ha52j")
+skeleton = NodePath("")
+
 [node name="Cube_015" type="MeshInstance3D" parent="RoadWithStripes4"]
 transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -1.38162, 0.80564, -0.362485)
 mesh = SubResource("ArrayMesh_xcgbq")
+skeleton = NodePath("")
+
+[node name="Cube_016" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -1.38162, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_ytope")
+skeleton = NodePath("")
+
+[node name="Cube_017" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 2.11364, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_340n7")
 skeleton = NodePath("")
 
 [node name="Cube_018" type="MeshInstance3D" parent="RoadWithStripes4"]
@@ -786,103 +722,28 @@ transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 2.11364, 0.805
 mesh = SubResource("ArrayMesh_5wh8e")
 skeleton = NodePath("")
 
+[node name="Cube_019" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 5.75763, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_rcqxu")
+skeleton = NodePath("")
+
+[node name="Cube_020" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 9.25289, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_xvjjo")
+skeleton = NodePath("")
+
+[node name="Cube_021" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 12.7853, 0.80564, -0.362485)
+mesh = SubResource("ArrayMesh_t2au3")
+skeleton = NodePath("")
+
+[node name="roadLane02" type="MeshInstance3D" parent="RoadWithStripes4"]
+transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -0.468547)
+mesh = SubResource("ArrayMesh_bryts")
+skeleton = NodePath("")
+
 [node name="roadLane03" type="MeshInstance3D" parent="RoadWithStripes4"]
 transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -0.468548)
-mesh = SubResource("ArrayMesh_bryts")
-skeleton = NodePath("")
-
-[node name="Node3D" type="Node3D" parent="RoadWithStripes4"]
-
-[node name="Cube_012" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -12.8719, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_cw75u")
-skeleton = NodePath("")
-
-[node name="Cube_013" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -9.02155, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_oepuf")
-skeleton = NodePath("")
-
-[node name="Cube_014" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -5.15167, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_ha52j")
-skeleton = NodePath("")
-
-[node name="Cube_016" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -1.38162, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_ytope")
-skeleton = NodePath("")
-
-[node name="Cube_017" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 2.11364, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_340n7")
-skeleton = NodePath("")
-
-[node name="Cube_019" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 5.75763, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_rcqxu")
-skeleton = NodePath("")
-
-[node name="Cube_020" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 9.25289, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_xvjjo")
-skeleton = NodePath("")
-
-[node name="Cube_021" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 12.7853, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_t2au3")
-skeleton = NodePath("")
-
-[node name="roadLane02" type="MeshInstance3D" parent="RoadWithStripes4/Node3D"]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -0.468548)
-mesh = SubResource("ArrayMesh_bryts")
-skeleton = NodePath("")
-
-[node name="Node3D2" type="Node3D" parent="RoadWithStripes4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.979)
-
-[node name="Cube_012" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -12.8719, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_cw75u")
-skeleton = NodePath("")
-
-[node name="Cube_013" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -9.02155, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_oepuf")
-skeleton = NodePath("")
-
-[node name="Cube_014" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -5.15167, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_ha52j")
-skeleton = NodePath("")
-
-[node name="Cube_016" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, -1.38162, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_ytope")
-skeleton = NodePath("")
-
-[node name="Cube_017" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 2.11364, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_340n7")
-skeleton = NodePath("")
-
-[node name="Cube_019" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 5.75763, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_rcqxu")
-skeleton = NodePath("")
-
-[node name="Cube_020" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 9.25289, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_xvjjo")
-skeleton = NodePath("")
-
-[node name="Cube_021" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.0944639, 0, 0, 0, 0.209779, 12.7853, 0.80564, -0.362486)
-mesh = SubResource("ArrayMesh_t2au3")
-skeleton = NodePath("")
-
-[node name="roadLane02" type="MeshInstance3D" parent="RoadWithStripes4/Node3D2"]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -0.552643)
 mesh = SubResource("ArrayMesh_bryts")
 skeleton = NodePath("")
 
@@ -925,246 +786,14 @@ collision_layer = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
 shape = SubResource("BoxShape3D_o1vng")
 
-[node name="Rock5" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.251295, 0.152912, -59.8045)
-
-[node name="Cube_027" type="MeshInstance3D" parent="Rock5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11854, 0.635097, 1.20177)
-mesh = SubResource("ArrayMesh_gbed0")
-skeleton = NodePath("")
-
-[node name="Cube_028" type="MeshInstance3D" parent="Rock5"]
-transform = Transform3D(0.762483, 0, 0, 0, 0.826092, 0, 0, 0, 0.866291, -1.08206, 0.726417, 1.90729)
-mesh = SubResource("ArrayMesh_q6erp")
-skeleton = NodePath("")
-
-[node name="Cube_029" type="MeshInstance3D" parent="Rock5"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.0842295, 0.650119, 0.472378)
-mesh = SubResource("ArrayMesh_d8xtu")
-skeleton = NodePath("")
-
-[node name="Cube_030" type="MeshInstance3D" parent="Rock5"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.345178, 1.20697, 1.31903)
-mesh = SubResource("ArrayMesh_18sa3")
-skeleton = NodePath("")
-
-[node name="Collider" type="StaticBody3D" parent="Rock5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0649796, 0, -0.00442886)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock5/Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
-shape = SubResource("BoxShape3D_o1vng")
-
-[node name="Rock6" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2513, 0.152912, -56.8045)
-
-[node name="Cube_027" type="MeshInstance3D" parent="Rock6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11854, 0.635097, 1.20177)
-mesh = SubResource("ArrayMesh_gbed0")
-skeleton = NodePath("")
-
-[node name="Cube_028" type="MeshInstance3D" parent="Rock6"]
-transform = Transform3D(0.762483, 0, 0, 0, 0.826092, 0, 0, 0, 0.866291, -1.08206, 0.726417, 1.90729)
-mesh = SubResource("ArrayMesh_q6erp")
-skeleton = NodePath("")
-
-[node name="Cube_029" type="MeshInstance3D" parent="Rock6"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.0842295, 0.650119, 0.472378)
-mesh = SubResource("ArrayMesh_d8xtu")
-skeleton = NodePath("")
-
-[node name="Cube_030" type="MeshInstance3D" parent="Rock6"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.345178, 1.20697, 1.31903)
-mesh = SubResource("ArrayMesh_18sa3")
-skeleton = NodePath("")
-
-[node name="Collider" type="StaticBody3D" parent="Rock6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0649796, 0, -0.00442886)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock6/Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
-shape = SubResource("BoxShape3D_o1vng")
-
-[node name="Rock7" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7487, 1.15291, -41.8045)
-
-[node name="Cube_027" type="MeshInstance3D" parent="Rock7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11854, 0.635097, 1.20177)
-mesh = SubResource("ArrayMesh_gbed0")
-skeleton = NodePath("")
-
-[node name="Cube_028" type="MeshInstance3D" parent="Rock7"]
-transform = Transform3D(0.762483, 0, 0, 0, 0.826092, 0, 0, 0, 0.866291, -1.08206, 0.726417, 1.90729)
-mesh = SubResource("ArrayMesh_q6erp")
-skeleton = NodePath("")
-
-[node name="Cube_029" type="MeshInstance3D" parent="Rock7"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.0842295, 0.650119, 0.472378)
-mesh = SubResource("ArrayMesh_d8xtu")
-skeleton = NodePath("")
-
-[node name="Cube_030" type="MeshInstance3D" parent="Rock7"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.345178, 1.20697, 1.31903)
-mesh = SubResource("ArrayMesh_18sa3")
-skeleton = NodePath("")
-
-[node name="Collider" type="StaticBody3D" parent="Rock7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0649796, 0, -0.00442886)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock7/Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
-shape = SubResource("BoxShape3D_o1vng")
-
-[node name="Rock2" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.2513, 0.152912, -8.81134)
-
-[node name="Cube_027" type="MeshInstance3D" parent="Rock2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11854, 0.635097, 1.20177)
-mesh = SubResource("ArrayMesh_gbed0")
-skeleton = NodePath("")
-
-[node name="Cube_028" type="MeshInstance3D" parent="Rock2"]
-transform = Transform3D(0.762483, 0, 0, 0, 0.826092, 0, 0, 0, 0.866291, -1.08206, 0.726417, 1.90729)
-mesh = SubResource("ArrayMesh_q6erp")
-skeleton = NodePath("")
-
-[node name="Cube_029" type="MeshInstance3D" parent="Rock2"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.0842295, 0.650119, 0.472378)
-mesh = SubResource("ArrayMesh_d8xtu")
-skeleton = NodePath("")
-
-[node name="Cube_030" type="MeshInstance3D" parent="Rock2"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.345178, 1.20697, 1.31903)
-mesh = SubResource("ArrayMesh_18sa3")
-skeleton = NodePath("")
-
-[node name="Collider" type="StaticBody3D" parent="Rock2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0649796, 0, -0.00442886)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock2/Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
-shape = SubResource("BoxShape3D_o1vng")
-
-[node name="Rock3" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.2031, 0.152912, -17.8113)
-
-[node name="Cube_027" type="MeshInstance3D" parent="Rock3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11854, 0.635097, 1.20177)
-mesh = SubResource("ArrayMesh_gbed0")
-skeleton = NodePath("")
-
-[node name="Cube_028" type="MeshInstance3D" parent="Rock3"]
-transform = Transform3D(0.762483, 0, 0, 0, 0.826092, 0, 0, 0, 0.866291, -1.08206, 0.726417, 1.90729)
-mesh = SubResource("ArrayMesh_q6erp")
-skeleton = NodePath("")
-
-[node name="Cube_029" type="MeshInstance3D" parent="Rock3"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.0842295, 0.650119, 0.472378)
-mesh = SubResource("ArrayMesh_d8xtu")
-skeleton = NodePath("")
-
-[node name="Cube_030" type="MeshInstance3D" parent="Rock3"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.345178, 1.20697, 1.31903)
-mesh = SubResource("ArrayMesh_18sa3")
-skeleton = NodePath("")
-
-[node name="Collider" type="StaticBody3D" parent="Rock3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0649796, 0, -0.00442886)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock3/Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
-shape = SubResource("BoxShape3D_o1vng")
-
-[node name="Rock4" type="Node3D" parent="."]
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -10.2031, 0.152912, -19.8113)
-
-[node name="Cube_027" type="MeshInstance3D" parent="Rock4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11854, 0.635097, 1.20177)
-mesh = SubResource("ArrayMesh_gbed0")
-skeleton = NodePath("")
-
-[node name="Cube_028" type="MeshInstance3D" parent="Rock4"]
-transform = Transform3D(0.762483, 0, 0, 0, 0.826092, 0, 0, 0, 0.866291, -1.08206, 0.726417, 1.90729)
-mesh = SubResource("ArrayMesh_q6erp")
-skeleton = NodePath("")
-
-[node name="Cube_029" type="MeshInstance3D" parent="Rock4"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.0842295, 0.650119, 0.472378)
-mesh = SubResource("ArrayMesh_d8xtu")
-skeleton = NodePath("")
-
-[node name="Cube_030" type="MeshInstance3D" parent="Rock4"]
-transform = Transform3D(0.784601, 0, 0, 0, 0.587205, 0, 0, 0, 0.67009, 0.345178, 1.20697, 1.31903)
-mesh = SubResource("ArrayMesh_18sa3")
-skeleton = NodePath("")
-
-[node name="Collider" type="StaticBody3D" parent="Rock4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0649796, 0, -0.00442886)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock4/Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
-shape = SubResource("BoxShape3D_o1vng")
-
 [node name="Car" parent="." instance=ExtResource("5_ov2pb")]
 transform = Transform3D(-0.999739, -0.0190939, -0.012555, -0.0189845, 0.999781, -0.0087729, 0.0127198, -0.00853224, -0.999883, 17.8729, 1.45568, -4.08271)
 linear_velocity = Vector3(-12, 0, 0)
 time = 6.0
 
-[node name="Car6" parent="." instance=ExtResource("5_ov2pb")]
-transform = Transform3D(-0.999739, -0.0190939, -0.012555, -0.0189845, 0.999781, -0.0087729, 0.0127198, -0.00853224, -0.999883, 17.8729, 1.45568, -44.0827)
-linear_velocity = Vector3(-20, 0, 0)
-time = 6.0
-
-[node name="Car8" parent="." instance=ExtResource("5_ov2pb")]
-transform = Transform3D(0.999739, 0.0190939, 0.0125551, -0.0189845, 0.999781, -0.0087729, -0.0127199, 0.00853224, 0.999883, -17.7323, 1.45568, -51.5316)
-linear_velocity = Vector3(22, 0, 0)
-time = 4.0
-
-[node name="Car9" parent="." instance=ExtResource("5_ov2pb")]
-transform = Transform3D(0.999739, 0.0190939, 0.0125551, -0.0189845, 0.999781, -0.0087729, -0.0127199, 0.00853224, 0.999883, -17.7323, 1.45568, -63.2121)
-linear_velocity = Vector3(40, 0, 0)
-time = 2.0
-
-[node name="Car10" parent="." instance=ExtResource("5_ov2pb")]
-transform = Transform3D(0.999739, 0.0190939, 0.0125551, -0.0189845, 0.999781, -0.0087729, -0.0127199, 0.00853224, 0.999883, -17.7323, 1.45568, -67.2121)
-linear_velocity = Vector3(44, 0, 0)
-time = 2.4
-
 [node name="Car2" parent="." instance=ExtResource("6_67td3")]
 transform = Transform3D(0.999739, 0.0190939, 0.0125551, -0.0189845, 0.999781, -0.0087729, -0.0127199, 0.00853224, 0.999883, -19.7045, 1.43255, -12.3553)
 linear_velocity = Vector3(14, 0, 0)
-
-[node name="RoadWithStripes5" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35.756)
-
-[node name="roadLane02" type="MeshInstance3D" parent="RoadWithStripes5"]
-transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -0.468547)
-mesh = SubResource("ArrayMesh_bryts")
-skeleton = NodePath("")
-
-[node name="Car5" parent="." instance=ExtResource("6_67td3")]
-transform = Transform3D(0.999739, 0.0190939, 0.0125551, -0.0189845, 0.999781, -0.0087729, -0.0127199, 0.00853224, 0.999883, -19.7045, 1.43255, -36.3553)
-linear_velocity = Vector3(14, 0, 0)
-
-[node name="Car3" parent="." instance=ExtResource("6_67td3")]
-transform = Transform3D(-0.999739, -0.0190939, -0.012555, -0.0189845, 0.999781, -0.0087729, 0.0127198, -0.00853224, -0.999883, 21.1927, 1.43255, -24.3553)
-linear_velocity = Vector3(-18, 0, 0)
-
-[node name="Car4" parent="." instance=ExtResource("6_67td3")]
-transform = Transform3D(-0.999739, -0.0190939, -0.012555, -0.0189845, 0.999781, -0.0087729, 0.0127198, -0.00853224, -0.999883, 21.1927, 1.43255, -28.3553)
-linear_velocity = Vector3(-18, 0, 0)
-time = 4.0
-
-[node name="Car7" parent="." instance=ExtResource("6_67td3")]
-transform = Transform3D(-0.999739, -0.0190939, -0.012555, -0.0189845, 0.999781, -0.0087729, 0.0127198, -0.00853224, -0.999883, 21.1927, 1.43255, -48.4184)
-linear_velocity = Vector3(-18, 0, 0)
-time = 4.0
 
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 1500.0
@@ -1175,61 +804,9 @@ autostart = true
 timer_label = NodePath("../UILayer/GameUI/TimerLabel")
 
 [node name="FinishLine" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, -9)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinishLine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 0, -83)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.6504)
 shape = SubResource("BoxShape3D_klun3")
-
-[node name="Tree" parent="." instance=ExtResource("9_31um8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3061, 1, -17.3217)
-
-[node name="Tree-alt4" parent="." instance=ExtResource("10_o3fv8")]
-transform = Transform3D(0.743209, 0, 0, 0, 0.743209, 0, 0, 0, 0.743209, 18.5876, 1.55233, -7.3626)
-
-[node name="Tree-alt5" parent="." instance=ExtResource("10_o3fv8")]
-transform = Transform3D(0.743209, 0, 0, 0, 0.743209, 0, 0, 0, 0.743209, 14.5876, 2.08569, 4.178)
-
-[node name="Tree-alt6" parent="." instance=ExtResource("10_o3fv8")]
-transform = Transform3D(-3.24867e-08, 0, 0.743209, 0, 0.743209, 0, -0.743209, 0, -3.24867e-08, -1.77464, 2.0857, -1.81064)
-
-[node name="Tree-alt7" parent="." instance=ExtResource("10_o3fv8")]
-transform = Transform3D(-0.728566, 0, 0.146799, 0, 0.743209, 0, -0.146799, 0, -0.728566, -14.7124, 2.0857, 4.16094)
-
-[node name="Tree-alt2" parent="." instance=ExtResource("10_o3fv8")]
-transform = Transform3D(0.743209, 0, 0, 0, 0.743209, 0, 0, 0, 0.743209, 13.5876, 1.55233, -30.3088)
-
-[node name="Tree-alt3" parent="." instance=ExtResource("10_o3fv8")]
-transform = Transform3D(-3.24867e-08, 0, -0.743209, 0, 0.743209, 0, 0.743209, 0, -3.24867e-08, -4.41241, 1.55233, -30.3088)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(77.2403, 0, 0, 0, 80.7784, 0, 0, 0, 1.49776, 0, 0, 14.5473)
-mesh = SubResource("BoxMesh_3pt0w")
-surface_material_override/0 = SubResource("StandardMaterial3D_2svql")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(77.2403, 0, 0, 0, 80.7784, 0, 0, 0, 1.49776, 0, 0, -77.4527)
-mesh = SubResource("BoxMesh_3pt0w")
-surface_material_override/0 = SubResource("StandardMaterial3D_2svql")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
-transform = Transform3D(77.2403, 0, 0, 0, 80.7784, 0, 0, 0, 99.8436, 0, 0, -129.955)
-mesh = SubResource("BoxMesh_3pt0w")
-surface_material_override/0 = SubResource("StandardMaterial3D_2svql")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-6.41493e-06, 0, -1.49776, 0, 80.7784, 0, 146.757, 0, -6.54692e-08, 16, 0, -52.4527)
-mesh = SubResource("BoxMesh_3pt0w")
-surface_material_override/0 = SubResource("StandardMaterial3D_2svql")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(-6.41493e-06, 0, -1.49776, 0, 80.7784, 0, 146.757, 0, -6.54692e-08, -16, 0, -52.4527)
-mesh = SubResource("BoxMesh_3pt0w")
-surface_material_override/0 = SubResource("StandardMaterial3D_2svql")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(77.2403, 0, 0, 0, 80.7784, 0, 0, 0, 1.49776, 0, 0, 18.5473)
-mesh = SubResource("BoxMesh_3pt0w")
-surface_material_override/0 = SubResource("StandardMaterial3D_2svql")
 
 [editable path="UILayer"]

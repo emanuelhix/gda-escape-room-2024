@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://ivs6udno7ri7"]
+
+[ext_resource type="Script" path="res://timer_label.gd" id="1_sqsf8"]
+
+[node name="UILayer" type="CanvasLayer"]
+
+[node name="GameUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TimerLabel" type="Label" parent="GameUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_sqsf8")
+metadata/_edit_use_anchors_ = true

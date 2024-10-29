@@ -8,7 +8,7 @@ extends Camera3D
 
 var camera_tween: Tween # Tween instance for animating the camera movement
 var last_z: float = 0 # Last camera Z position for preventing the camera from going backwards.
-var global_override: bool = true
+var global_override: bool = false
 
 func _ready() -> void:
 	self.global_position = offset_marker.global_position
@@ -66,4 +66,4 @@ func force_reset():
 		camera_tween.stop()
 	self.global_position = offset_marker.global_position
 	last_z = self.global_position.z
-	global_override = true
+	#global_override = true
