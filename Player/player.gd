@@ -47,6 +47,9 @@ func _process(delta: float) -> void:
 	if not action_pressed:
 		return
 
+	if anim_player.is_playing():
+		# interrupt the animation. this isn't very smooth, but it looks better than the animation continuing over two jumps.
+		anim_player.stop()
 	anim_player.play("jump")
 	end_position = global_position + direction
 	tween = get_tree().create_tween()
