@@ -8,6 +8,7 @@ extends Camera3D
 
 var camera_tween: Tween # Tween instance for animating the camera movement
 var last_z: float = 0 # Last camera Z position for preventing the camera from going backwards.
+var global_override: bool = true
 
 func _ready() -> void:
 	self.global_position = offset_marker.global_position
@@ -57,4 +58,12 @@ func on_player_ended_moving() -> void:
 
 func can_update_camera():
 	# we use >= to account for moving only along the x direction (strafing)
-	return !last_z > self.global_position.z
+	return global_override and !last_z > self.global_position.z
+
+func force_reset():
+	global_override = false
+	if camera_tween and camera_tween.is_running():
+		camera_tween.stop()
+	self.global_position = offset_marker.global_position
+	last_z = self.global_position.z
+	global_override = true

@@ -1,9 +1,8 @@
-[gd_scene load_steps=51 format=4 uid="uid://c47efgxp2dyaa"]
+[gd_scene load_steps=50 format=4 uid="uid://dapbm2ujmtcg8"]
 
-[ext_resource type="PackedScene" uid="uid://c3t8uy1et6fe1" path="res://Player/player.tscn" id="1_w8a2e"]
-[ext_resource type="Script" path="res://level/Main.gd" id="1_xu62y"]
-[ext_resource type="Script" path="res://level/scrolling_camera.gd" id="1_ygdag"]
-[ext_resource type="Script" path="res://level/check_move.gd" id="3_itr7y"]
+[ext_resource type="Script" path="res://level/scrolling_camera.gd" id="1_tbghv"]
+[ext_resource type="PackedScene" uid="uid://c3t8uy1et6fe1" path="res://Player/player.tscn" id="2_onfj0"]
+[ext_resource type="Script" path="res://level/check_move.gd" id="3_8ikbk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwef4"]
 resource_name = "Grass.001"
@@ -538,23 +537,19 @@ shadow_mesh = SubResource("ArrayMesh_lvnei")
 [sub_resource type="BoxShape3D" id="BoxShape3D_o1vng"]
 size = Vector3(4, 3, 5)
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("player", "player_on_screen_notifier", "camera")]
-script = ExtResource("1_xu62y")
-player = NodePath("Player")
-player_on_screen_notifier = NodePath("Player/VisibleOnScreenNotifier3D")
-camera = NodePath("ScrollingCamera")
+[node name="Origin" type="Node3D"]
 
 [node name="ScrollingCamera" type="Camera3D" parent="." node_paths=PackedStringArray("offset_marker", "player")]
 transform = Transform3D(0.804459, -0.312584, 0.505111, 1.49012e-08, 0.850343, 0.526228, -0.594009, -0.423329, 0.684066, 4.58844, 9.11962, 12.4542)
-script = ExtResource("1_ygdag")
+script = ExtResource("1_tbghv")
 offset_marker = NodePath("../Player/CameraOffset")
 player = NodePath("../Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_w8a2e")]
+[node name="Player" parent="." instance=ExtResource("2_onfj0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7458, 7.74745)
 
 [node name="CameraOffset" type="Marker3D" parent="Player"]
@@ -564,7 +559,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 4.5)
 transform = Transform3D(1, 0.000180559, 6.95464e-05, -0.000180531, 1, -0.000174341, -6.95592e-05, 0.000174351, 1, 0, 0, 0)
 hit_from_inside = true
 hit_back_faces = false
-script = ExtResource("3_itr7y")
+script = ExtResource("3_8ikbk")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Player"]
 
@@ -767,5 +762,5 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0649796, 0, -0.00442886)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rock/Collider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.419899, 1.98149, 1.3996)
+transform = Transform3D(1, -0.000711974, 1.58632e-05, 0.000711978, 1, -0.000236804, -1.56848e-05, 0.000236816, 1, -0.419899, 1.98149, 1.3996)
 shape = SubResource("BoxShape3D_o1vng")
