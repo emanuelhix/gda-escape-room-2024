@@ -1,3 +1,5 @@
+# unused script
+
 extends RayCast3D  # or Node3D in Godot 4.x
 
 @onready var player = get_parent()

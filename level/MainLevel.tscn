@@ -1,6 +1,7 @@
-[gd_scene load_steps=50 format=4 uid="uid://c47efgxp2dyaa"]
+[gd_scene load_steps=51 format=4 uid="uid://c47efgxp2dyaa"]
 
 [ext_resource type="PackedScene" uid="uid://c3t8uy1et6fe1" path="res://Player/player.tscn" id="1_w8a2e"]
+[ext_resource type="Script" path="res://level/Main.gd" id="1_xu62y"]
 [ext_resource type="Script" path="res://level/scrolling_camera.gd" id="1_ygdag"]
 [ext_resource type="Script" path="res://level/check_move.gd" id="3_itr7y"]
 
@@ -537,7 +538,9 @@ shadow_mesh = SubResource("ArrayMesh_lvnei")
 [sub_resource type="BoxShape3D" id="BoxShape3D_o1vng"]
 size = Vector3(4, 3, 5)
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("player_on_screen_notifier")]
+script = ExtResource("1_xu62y")
+player_on_screen_notifier = NodePath("Player/VisibleOnScreenNotifier3D")
 
 [node name="ScrollingCamera" type="Camera3D" parent="." node_paths=PackedStringArray("offset_marker", "player")]
 transform = Transform3D(0.804459, -0.312584, 0.505111, 1.49012e-08, 0.850343, 0.526228, -0.594009, -0.423329, 0.684066, 4.58844, 9.11962, 12.4542)
@@ -556,9 +559,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7458, 7.74745)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 4.5)
 
 [node name="RayCast3D" type="RayCast3D" parent="Player"]
+transform = Transform3D(1, 0.000180559, 6.95464e-05, -0.000180531, 1, -0.000174341, -6.95592e-05, 0.000174351, 1, 0, 0, 0)
 hit_from_inside = true
 hit_back_faces = false
 script = ExtResource("3_itr7y")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Player"]
 
 [node name="grass" type="MeshInstance3D" parent="."]
 transform = Transform3D(29.7775, 0, 0, 0, 0.129519, 0, 0, 0, 1.55, 0.0905848, 0.580035, -0.247082)
