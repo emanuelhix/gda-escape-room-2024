@@ -10,6 +10,7 @@ signal move_start  # Fires when the movement animation starts
 signal move_end    # Fires when the movement animation ends
 
 @onready var anim_player = $AnimationPlayer
+@onready var raycast = $RayCast3D
 
 # New end position
 var end_position: Vector3 = Vector3()  # Renamed for clarity
@@ -22,12 +23,13 @@ var tween: Tween = null
 func _process(delta: float) -> void:
 	if tween and tween.is_running():
 		return
-
+	if not raycast:
+		return
 	var action_mapping = {
-		LEFT: Vector3(-5, 0, 0),
-		RIGHT: Vector3(5, 0, 0),
-		FORWARD: Vector3(0, 0, -5),
-		BACK: Vector3(0, 0, 5)
+		LEFT: Vector3(-4, 0, 0),
+		RIGHT: Vector3(4, 0, 0),
+		FORWARD: Vector3(0, 0, -4),
+		BACK: Vector3(0, 0, 4)
 	}
 
 	var direction: Vector3 = Vector3.ZERO
@@ -43,15 +45,20 @@ func _process(delta: float) -> void:
 				BACK: dir_angle = 180
 			action_pressed = true
 			break  # Exit the loop once an action is pressed
-
 	if not action_pressed:
+		return
+	
+	# collision prevention
+	end_position = global_position + direction
+	raycast.target_position = direction
+	raycast.force_raycast_update()
+	if raycast.is_colliding():
 		return
 
 	if anim_player.is_playing():
 		# interrupt the animation. this isn't very smooth, but it looks better than the animation continuing over two jumps.
 		anim_player.stop()
 	anim_player.play("jump")
-	end_position = global_position + direction
 	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", end_position, MOVE_DURATION)
 	tween.tween_callback(move_end.emit)
