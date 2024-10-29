@@ -1,10 +1,10 @@
 extends Camera3D
 
 @export var camera_max_anim_time: float = 3.0  # Maximum animation time for camera movement
-@export var camera_min_anim_time: float = 0.38  # Minimum animation time for camera movement
+@export var camera_min_anim_time: float = 0.3 # Minimum animation time for camera movement
 @export var speed: float = 1.2  # Speed at which the camera moves
 @export var offset_marker: Marker3D = null  # Marker that defines the camera's target offset
-@export var player: CharacterBody3D = null  # Reference to the player character
+@export var player: RigidBody3D = null  # Reference to the player character
 
 var camera_tween: Tween # Tween instance for animating the camera movement
 var last_z: float = 0 # Last camera Z position for preventing the camera from going backwards.

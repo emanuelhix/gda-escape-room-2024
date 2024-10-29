@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends RigidBody3D
 
 const LEFT: String = "left"
 const FORWARD: String = "forward"

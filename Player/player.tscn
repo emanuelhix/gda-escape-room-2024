@@ -1,16 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3t8uy1et6fe1"]
+[gd_scene load_steps=9 format=3 uid="uid://c3t8uy1et6fe1"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_dptqk"]
+[ext_resource type="PackedScene" uid="uid://cvo5gak1ut3og" path="res://character.blend" id="2_fsasx"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drraw"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_t075t"]
-material = SubResource("StandardMaterial3D_drraw")
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c2iuh"]
-
-[sub_resource type="Animation" id="Animation_246uv"]
+[sub_resource type="Animation" id="Animation_jb3et"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -25,7 +18,7 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_3ik2f"]
+[sub_resource type="Animation" id="Animation_y8sb5"]
 resource_name = "jump"
 length = 0.5
 tracks/0/type = "value"
@@ -35,28 +28,55 @@ tracks/0/path = NodePath("MeshInstance3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.366667),
+"times": PackedFloat32Array(0, 0.166667, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 2, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("character:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 2, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmxum"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1pi58"]
 _data = {
-"RESET": SubResource("Animation_246uv"),
-"jump": SubResource("Animation_3ik2f")
+"RESET": SubResource("Animation_jb3et"),
+"jump": SubResource("Animation_y8sb5")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c2iuh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drraw"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_t075t"]
+material = SubResource("StandardMaterial3D_drraw")
+
+[node name="Player" type="RigidBody3D"]
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_dptqk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_t075t")
+[node name="character" parent="." instance=ExtResource("2_fsasx")]
+transform = Transform3D(-1.09278e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.09278e-08, 0, -0.51151, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1pi58")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_c2iuh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_wmxum")
-}
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_t075t")
+skeleton = NodePath("")
